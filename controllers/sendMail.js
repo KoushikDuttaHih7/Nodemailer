@@ -13,7 +13,18 @@ const sendMail = async (req, res) => {
       pass: "wDmJWDxAYrft7fNPZK",
     },
   });
-  res.send("I am sending mail");
+
+  let info = await transporter.sendMail({
+    from: '"Koushik" <norbert32@ethereal.email>', // sender address
+    to: "iamkoushik1999@gmail.com, baz@example.com", // list of receivers
+    subject: "Hello ✔", // Subject line
+    text: "Hello world", // plain text body
+    html: "<b>Hello world</b>", // html body
+  });
+
+  console.log("Message sent: %s", info.messageId);
+
+  res.json(info);
 };
 
 module.exports = sendMail;
